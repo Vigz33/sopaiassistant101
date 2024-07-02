@@ -136,8 +136,7 @@
                                         <div id="div_chat_response_time" style="font-size: 12px; color: gray; ">&nbsp;</div>
                                     </figure>
                                     <div class="p-section__sticky-callout__copy">
-                                        <div class="p-section__sticky-callout__text"  id="div_chat_messages" >
-                                        </div>
+                                        <div class="p-section__sticky-callout__text"  id="div_chat_messages"  style="white-space: pre-wrap;" ></div>
                                     </div>
                                 </div>  
                                 <!-- Chat response ends ---->
@@ -332,6 +331,13 @@
 
                 return replacedString;
             }
+
+            function convertBoldMarkers(text) {
+                // Use a regular expression to find text between double asterisks (**)
+                // and replace it with <strong> tags.
+                const boldRegex = /\*\*(.*?)\*\*/g;
+                return text.replace(boldRegex, '<strong>$1</strong>');
+            }
             
             // Update view
             function updateView(query) {
@@ -473,7 +479,7 @@
                         console.log("---------------------> STOP ", duration, " second" )
                         stopAnimation();
                         
-                        divChatMessages.innerHTML = formatCodeSnippets(replaceUrlsWithAnchorTags(keepTakingData))
+                        divChatMessages.innerHTML = formatCodeSnippets(replaceUrlsWithAnchorTags(convertBoldMarkers(keepTakingData)))
                         var divChatResponseTime = document.getElementById("div_chat_response_time");
                         divChatResponseTime.innerHTML = delayInSeconds+"s";
                     } catch (er) {
