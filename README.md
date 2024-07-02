@@ -1,4 +1,4 @@
-# Sirius Lite Web Client for Dify
+# Sirius Lite Web Client for Developer Docs
 
 * Code structure *
 ```
