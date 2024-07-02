@@ -1,0 +1,22 @@
+name: push-alerts-to-mop
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'monitoring/alerts/**'
+
+jobs:
+  alerting:
+    if: ${{ false }}
+    runs-on: ubuntu-latest
+    name: push-alerts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: Maersk-Global/observability-the-pensieve-template@v2
+        with:
+          team_name: <<HEDWIG_TEAM_NAME>>
+          metrics_path: monitoring/alerts/metrics
+          client_id: ${{ secrets.MOP_CLIENT_ID }}
+          secret_id: ${{ secrets.MOP_SECRET_ID }}
